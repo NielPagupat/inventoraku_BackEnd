@@ -30,4 +30,17 @@ class getController extends Controller
         $productData = DB::table('products_table')-> where('user_id', $uid) -> get();
         return response() -> json(['status'=>200, 'userData'=>$productData]);
     }
+
+    public function getProdPrice(Request $req){
+        $UID = $req -> query('UID');
+        $PID = $req -> query('PID');
+
+        $getPrice = DB::select('call getPrice(?,?)', array($UID, $PID));
+
+        if ($getPrice) {
+            return response() -> json(['status'=>200, 'price' => $getPrice]);
+        } else {
+            return response() -> json(['status'=>200, 'price' => 0]);
+        }
+    }
 }

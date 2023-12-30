@@ -49,4 +49,53 @@ class postController extends Controller
         }
 
     }
+
+    public function saveEditProduct(Request $req) {
+        $PID = $req -> input('PID');
+        $UID = $req -> input('UID');
+        $Pname = $req -> input('Pname');
+        $CP = $req -> input('CP');
+        $RP = $req -> input('RP');
+        $Desc = $req -> input('Desc');
+        // return response() -> json(['status:'=>200, "message"=>[$Pname, $CP, $RP, $Desc, $PID, $UID]]);
+        $save = DB::select('call EditProductInfo(?,?,?,?,?,?)', array($Pname, $CP, $RP, $Desc, $PID, $UID));
+        if ($save) {
+           return response() -> json(['status:'=>200, "message"=>"saved"]);
+        } else {
+           return response() -> json(['status:'=>505, "message"=>[$Pname, $CP, $RP, $Desc, $PID, $UID]]);
+        }
+
+    }
+    public function itemSold(Request $req) {
+        $PID = $req -> input('PID');
+        $UID = $req -> input('UID');
+        $Name = $req -> input('Name');
+        $Rprice = $req -> input('Rprice');
+        $Cprice = $req -> input('Cprice');
+        $Quantity = $req -> input('Quantity');
+
+        $save = DB::select('call itemSold(?,?,?,?,?,?)', array($PID, $UID, $Name, $Cprice, $Rprice, $Quantity));
+        
+        if ($save) {
+            return response() -> json(['status'=>200, 'response'=>'Item Saved']);
+        } else {
+            return response() -> json(['status'=>200, 'response'=>'fail']);
+        }
+    }
+
+    public function totalSold(Request $req){
+        $UID = $req -> input('UID');
+        $Capital = $req -> input('capital');
+        $Retail = $req -> input('retail');
+        $Profit = $req -> input('Profit');
+
+        $save = DB::select('call soldTotal(?,?,?,?)', array($UID, $Capital, $Retail, $Profit));
+        
+        if ($save) {
+            return response() -> json(['status'=>200, 'response'=>'Item Saved']);
+        } else {
+            return response() -> json(['status'=>200, 'response'=>'fail']);
+        }
+
+    }
 }

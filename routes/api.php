@@ -22,6 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('login', [getController::class, 'login']);
 Route::get('getUdata',[getController::class, 'getUserData']);
 Route::get('getProduct', [getController::class, 'getProduct']);
+Route::get('getPrice', [getController::class, 'getProdPrice']);
 
 Route::post('register',[postController::class, 'registerUser']);
 Route::post('addProduct', [postController::class, 'addProduct']);
+Route::post('save',[postController::class, 'saveEditProduct']);
+Route::post('itemSold', [postController::class, 'itemSold']);
+Route::post('totalSold', [postController::class, 'totalSold']);
