@@ -35,6 +35,8 @@ Route::get('getTotalDaily',[getController::class, 'getTotalDaily']);
 Route::get('getTotalWeekly',[getController::class, 'getTotalWeekly']);
 Route::get('getTotalMonthly',[getController::class, 'getTotalMonthly']);
 Route::get('getTotalYearly',[getController::class, 'getTotalYearly']);
+Route::get('getIncomplete',[getController::class, 'getIncompleteOrderInfo']);
+Route::get('getCompleted',[getController::class, 'getCompletedOrderInfo']);
 
 Route::post('register',[postController::class, 'registerUser']);
 Route::post('addProduct', [postController::class, 'addProduct']);

@@ -130,4 +130,19 @@ class getController extends Controller
 
         return response() -> json(['status' => 200, 'record'=>$res]);
     }
+
+    public function getIncompleteOrderInfo(Request $req){
+        $UID = $req -> query('UID');
+
+        $res = DB::select('call getIncompleteOrderInfo(?)', array($UID));
+
+        return response() -> json(['status'=>200, 'orderInfo'=>$res]);
+    }
+
+    public function getCompletedOrderInfo(Request $req){
+        $UID = $req -> query('UID');
+        $res = DB::select('call getCompletedOrderInfo(?)', array($UID));
+
+        return response() -> json(['status'=>200, 'orderInfo'=>$res]);
+    }
 }
