@@ -43,4 +43,91 @@ class getController extends Controller
             return response() -> json(['status'=>200, 'price' => 0]);
         }
     }
+
+    public function getResDet(Request $req){
+        $UID = $req -> query('UID');
+        $PID = $req -> query('PID');
+
+        $res = DB::select('call getResInfo(?,?)', [$UID, $PID]);
+
+        return response() -> json(['status'=>200, 'info'=>$res]);
+    }
+
+    public function getProfit(Request $req){
+        $UID = $req -> query('UID');
+
+        $res = DB::select('call getProfit(?)', array($UID));
+        return response() -> json(['status'=>200, 'allprofit'=>$res]);
+    }
+
+    public function getItemProfit(Request $req){
+        $UID = $req -> query('UID');
+        $res = DB::select('call getItemSold(?)', array($UID));
+        return response() -> json(['status'=>200, 'itemProfit'=>$res]);
+    }
+
+    public function getSingleDaily(Request $req){
+        $UID = $req -> query('UID');
+        $Date = $req -> query('Date');
+
+        $res = DB::select('call singleDailyTotal(?,?)', array($UID, $Date));
+
+        return response() -> json(['status' => 200, 'record'=>$res]);
+    }
+    public function getSingleWeekly(Request $req){
+        $UID = $req -> query('UID');
+        $Date = $req -> query('Date');
+
+        $res = DB::select('call singleWeeklyTotal(?,?)', array($UID, $Date));
+
+        return response() -> json(['status' => 200, 'record'=>$res]);
+    }
+    public function getSingleMonthly(Request $req){
+        $UID = $req -> query('UID');
+        $Date = $req -> query('Date');
+
+        $res = DB::select('call singleMonthlyTOtal(?,?)', array($UID, $Date));
+
+        return response() -> json(['status' => 200, 'record'=>$res]);
+    }
+    public function getSingleYearly(Request $req){
+        $UID = $req -> query('UID');
+        $Date = $req -> query('Date');
+
+        $res = DB::select('call singleYearlyTotal(?,?)', array($UID, $Date));
+
+        return response() -> json(['status' => 200, 'record'=>$res]);
+    }
+    public function getTotalDaily(Request $req){
+        $UID = $req -> query('UID');
+        $Date = $req -> query('Date');
+
+        $res = DB::select('call totalDailySummary(?,?)', array($UID, $Date));
+
+        return response() -> json(['status' => 200, 'record'=>$res]);
+    }
+    public function getTotalWeekly(Request $req){
+        $UID = $req -> query('UID');
+        $Date = $req -> query('Date');
+
+        $res = DB::select('call totalWeeklySummary(?,?)', array($UID, $Date));
+
+        return response() -> json(['status' => 200, 'record'=>$res]);
+    }
+    public function getTotalMonthly(Request $req){
+        $UID = $req -> query('UID');
+        $Date = $req -> query('Date');
+
+        $res = DB::select('call totalMonthlySummary(?,?)', array($UID, $Date));
+
+        return response() -> json(['status' => 200, 'record'=>$res]);
+    }
+    public function getTotalYearly(Request $req){
+        $UID = $req -> query('UID');
+        $Date = $req -> query('Date');
+
+        $res = DB::select('call totalYearlySummary(?,?)', array($UID, $Date));
+
+        return response() -> json(['status' => 200, 'record'=>$res]);
+    }
 }

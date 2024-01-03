@@ -67,6 +67,7 @@ class postController extends Controller
 
     }
     public function itemSold(Request $req) {
+        $TID = $req -> input('TID');
         $PID = $req -> input('PID');
         $UID = $req -> input('UID');
         $Name = $req -> input('Name');
@@ -74,7 +75,7 @@ class postController extends Controller
         $Cprice = $req -> input('Cprice');
         $Quantity = $req -> input('Quantity');
 
-        $save = DB::select('call itemSold(?,?,?,?,?,?)', array($PID, $UID, $Name, $Cprice, $Rprice, $Quantity));
+        $save = DB::select('call itemSold(?,?,?,?,?,?,?)', array($PID, $UID, $Name, $Cprice, $Rprice, $Quantity, $TID));
         
         if ($save) {
             return response() -> json(['status'=>200, 'response'=>'Item Saved']);
@@ -84,12 +85,13 @@ class postController extends Controller
     }
 
     public function totalSold(Request $req){
+        $TID = $req -> input('TID');
         $UID = $req -> input('UID');
         $Capital = $req -> input('capital');
         $Retail = $req -> input('retail');
         $Profit = $req -> input('Profit');
 
-        $save = DB::select('call soldTotal(?,?,?,?)', array($UID, $Capital, $Retail, $Profit));
+        $save = DB::select('call setSoldTotal(?,?,?,?,?)', array($UID, $Capital, $Retail, $Profit, $TID));
         
         if ($save) {
             return response() -> json(['status'=>200, 'response'=>'Item Saved']);
@@ -97,5 +99,29 @@ class postController extends Controller
             return response() -> json(['status'=>200, 'response'=>'fail']);
         }
 
+    }
+    public function setResInfo(Request $req) {
+        $UID = $req -> input('UID');
+        $PID = $req -> input('PID');
+        $Pname = $req -> input('Pname');
+        $Quantity = $req -> input('QTY');
+        $SuppName = $req -> input('SuppName');
+        $SuppEmail = $req -> input('SuppEmail');
+        $DelvAddress = $req -> input('DelvAddress');
+        $ExDelvDate = $req -> input('ExDelvDate');
+    
+        $res = DB::select('call SetResInfo(?,?,?,?,?,?,?,?)', array($UID, $PID, $Pname, $Quantity, $SuppName, $SuppEmail, $DelvAddress, $ExDelvDate));
+
+        return response() -> json(['status'=>200, 'result'=>$res]);
+    }
+
+    public function setAutoRes(Request $req) {
+        $UID = $req -> input('UID');
+        $PID = $req -> input('PID');
+        $Stat = $req -> input('Status');
+
+        $res = DB::select('call setAutoRes(?,?,?)', array($UID, $PID, $Stat));
+
+        return response() -> json(['status' => 200, 'result' => $res]);
     }
 }

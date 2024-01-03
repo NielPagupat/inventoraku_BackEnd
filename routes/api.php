@@ -23,9 +23,23 @@ Route::get('login', [getController::class, 'login']);
 Route::get('getUdata',[getController::class, 'getUserData']);
 Route::get('getProduct', [getController::class, 'getProduct']);
 Route::get('getPrice', [getController::class, 'getProdPrice']);
+Route::get('getResDet', [getController::class, 'getResDet']);
+Route::get('getProfit', [getController::class, 'getProfit']);
+Route::get('getItemProfit', [getController::class, 'getItemProfit']);
+
+Route::get('getSingleDaily',[getController::class, 'getSingleDaily']);
+Route::get('getSingleWeekly',[getController::class, 'getSingleWeekly']);
+Route::get('getSingleMonthly',[getController::class, 'getSingleMonthly']);
+Route::get('getSingleYearly',[getController::class, 'getSingleYearly']);
+Route::get('getTotalDaily',[getController::class, 'getTotalDaily']);
+Route::get('getTotalWeekly',[getController::class, 'getTotalWeekly']);
+Route::get('getTotalMonthly',[getController::class, 'getTotalMonthly']);
+Route::get('getTotalYearly',[getController::class, 'getTotalYearly']);
 
 Route::post('register',[postController::class, 'registerUser']);
 Route::post('addProduct', [postController::class, 'addProduct']);
 Route::post('save',[postController::class, 'saveEditProduct']);
 Route::post('itemSold', [postController::class, 'itemSold']);
 Route::post('totalSold', [postController::class, 'totalSold']);
+Route::post('setResInfo',[postController::class, 'setResInfo']);
+Route::post('setAutoRes', [postController::class, 'setAutoRes']);
